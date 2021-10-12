@@ -1,6 +1,11 @@
 package com.ozangunalp;
 
-public class PointerEvent {
+import javax.persistence.Entity;
+
+import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+
+@Entity
+public class PointerEvent extends PanacheEntity {
 
     public String userId;
     public String sessionId;
