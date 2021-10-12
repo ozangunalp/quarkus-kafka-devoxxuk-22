@@ -7,9 +7,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.jboss.logging.Logger;
+
+import io.smallrye.mutiny.Uni;
+import io.smallrye.reactive.messaging.MutinyEmitter;
 
 @Path("/clicks")
 public class ClicksResource {
@@ -17,13 +19,13 @@ public class ClicksResource {
     @Inject
     Logger log;
 
-    @Inject
-    KafkaProducer<String, PointerEvent> producer;
+    @Channel("clicks-out")
+    MutinyEmitter<PointerEvent> emitter;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postClick(@HeaderParam("user-agent") String userAgent, PointerEvent click) {
+    public Uni<Void> postClick(@HeaderParam("user-agent") String userAgent, PointerEvent click) {
         log.infof("Click from %s : %s", userAgent, click);
-        producer.send(new ProducerRecord<>("clicks", click.userId, click));
+        return emitter.send(click);
     }
 }
