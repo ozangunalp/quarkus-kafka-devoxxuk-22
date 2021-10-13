@@ -26,11 +26,13 @@ public class PointerEvent extends PanacheEntityBase {
     public int clientX;
     public int clientY;
 
+    public String deviceType;
+
     public PointerEvent() {
     }
 
     public Tuple toTuple() {
-        return Tuple.from(new Object[]{userId, sessionId, pointerType, xpath, screenX, screenY, clientX, clientY});
+        return Tuple.from(new Object[]{userId, sessionId, pointerType, xpath, screenX, screenY, clientX, clientY, deviceType});
     }
 
     @Override
@@ -44,6 +46,7 @@ public class PointerEvent extends PanacheEntityBase {
                 ", screenY=" + screenY +
                 ", clientX=" + clientX +
                 ", clientY=" + clientY +
+                ", deviceType=" + deviceType +
                 '}';
     }
 }

@@ -31,8 +31,8 @@ public class ClicksPersistence {
     }
 
     private static final String sql =
-            "INSERT INTO pointerevent (userid, sessionid, pointertype, xpath, screenx, screeny, clientx, clienty) " +
-            "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+            "INSERT INTO pointerevent (userid, sessionid, pointertype, xpath, screenx, screeny, clientx, clienty, deviceType) " +
+            "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
     Uni<Void> insertBatch(List<PointerEvent> pointerEvents) {
         List<Tuple> tuples = pointerEvents.stream().map(PointerEvent::toTuple)
