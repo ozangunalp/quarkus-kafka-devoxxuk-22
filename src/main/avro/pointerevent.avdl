@@ -1,0 +1,25 @@
+@namespace("com.ozangunalp")
+protocol PointerEvent {
+    /** Pointer Event Entity */
+    record PointerEvent {
+        union { string, null } id;
+
+        string userId;
+
+        string sessionId;
+
+        string pointerType;
+
+        string xpath;
+
+        int screenX;
+
+        int screenY;
+
+        int clientX;
+
+        int clientY;
+
+        union { string, null } deviceType;
+    }
+}
